@@ -45,8 +45,8 @@ class Producto(models.Model):
 
     def __str__(self):
         return f'{self.nombre}' \
-               f'\nPrecio: {self.precio}' \
-               f'¡Aprovecha que solo queda {self.stock} unidades en stock...!'
+               f'\n - Precio: {self.precio}' \
+               f' - Stock: {self.stock}'
 
     def delete(self, using=None, keep_parents=False):
         self.imagen.storage.delete(self.imagen.name)
