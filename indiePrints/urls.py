@@ -16,12 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.contrib.staticfiles.urls import static
 
+from webapp import views
 from webapp.views import inicio
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('inicio/', inicio)
     path('', inicio),
-    # path('despedida.html', despedida)
-]
+    path('nosotros', views.nosotros, name='nosotros'),
+    path('contacto', views.contacto, name='contacto'),
+    path('catalogo', views.catalogo, name='catalogo'),
+
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header = "Indie Prints"
+admin.site.site_title = "Indie Prints | Administrador"
+admin.site.index_title = "Indie prints | Administrador"

@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  </head>
+  <body>
+  <hr/>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a href="#" class="button is-primary"><strong>Sign up</strong></a>
+            <a href="/admin" class="button is-light">Log in</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  <hr/>
+  <figure class="image" style="display: flex; justify-content: center;">
+   <img src="https://github.com/HieysonS/IndiePrintsImagenes/blob/main/LogoIP.jpg?raw=true" alt="Logo" style="width: 500px; height: auto;">
+  </figure>
+  <hr/>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-end">
+          <div class="column">
+            <a href="/" class="navbar-item">INICIO</a>
+          </div>
+          <div class="column">
+            <a href="catalogo" class="navbar-item">PRODUCTOS</a>
+          </div>
+          <div class="column">
+            <a href="nosotros" class="navbar-item">NOSOTROS</a>
+          </div>
+          <div class="column">
+            <a href="contacto" class="navbar-item">CONTACTO</a>
+          </div>
+        </div>
+    </nav>
+  <hr/>
+  <div class="container">
+      {% block contenedor %} {% endblock %}
+  </div>
+  <hr/>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Indie Prints</strong>
+      </p>
+    </div>
+    <div>
+       <p style="text-align: center">
+       234, Huancayo,<br />
+                      Pais, PE<br />
+       Call: +51 927183375<br>
+       Email: IndiePrints@gmail.com<br>
+         <strong>2023 www.IndiePrints.pe | All Right Reserved</strong>
+       </p>
+    </div>
+  </footer>
+  </body>
+</html>
