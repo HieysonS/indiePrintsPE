@@ -34,3 +34,7 @@ def catalogo(request):
     productos = paginator.get_page(page_number)
 
     return render(request, 'catalogo.html', {'productos': productos})
+
+def detalleProducto(request, id):
+    producto = Producto.objects.get(pk=id)
+    return render(request, 'detalleProducto.html', {'producto':producto})

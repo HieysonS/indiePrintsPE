@@ -42,12 +42,13 @@
           <div class="card">
             <div class="card-image">
               <figure class="image is-4by5">
+                <a href="detalleProducto/{{producto.id}}">
                 <img src="{{ producto.imagen.url }}" alt="Imagen de {{ producto.nombre }}">
+                </a>
               </figure>
             </div>
             <div class="card-content">
               <p class="title is-4">{{ producto.nombre }}</p>
-              <p class="subtitle is-6">{{ producto.descripcion }}</p>
               <p class="subtitle is-10">S/. {{ producto.precio}}</p>
               <p class="subtitle is-10">Stock: {{ producto.stock }}</p>
             </div>
