@@ -1,0 +1,32 @@
+{% extends "baseAdministracion.html" %}
+{% block titulo %} Administracion | Indie Prints{% endblock %}
+{% block contenedor %}
+<section class="section">
+    <div class="container">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="subtitle"><strong>Lista de Categorias: {{cantidad_categorias}}</strong></h1>
+            <a href="/agregarcategoria/" class="button is-primary"><strong>Agregar Categoria</strong></a>
+        </div>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for categoria in categorias %}
+            <tbody>
+                <tr>
+                    <td>{{ categoria.nombreCategoria }}</td>
+                    <td style="text-align: right; width: 1%; white-space: nowrap;">
+                        <a href="/editarcategoria/{{categoria.id}}" class="button is-small is-link is-outlined"><strong>Editar</strong></a>
+                        <a href="/eliminarategoria/{{categoria.id}}" class="button is-small is-danger is-outlined"><strong>Eliminar</strong></a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    <a href="/administrar" class="button is-small is-fullwidth is-link is-outlined"><strong>VOLVER</strong></a>
+</section>
+{% endblock %}

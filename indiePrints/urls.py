@@ -15,21 +15,53 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
 
+from producto import views as vproducto
 from webapp import views
-from webapp.views import inicio
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', inicio),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', views.inicio, name='inicio'),
     path('nosotros', views.nosotros, name='nosotros'),
     path('contacto', views.contacto, name='contacto'),
     path('catalogo', views.catalogo, name='catalogo'),
+    path('administrar', views.administrar, name='administrar'),
+    path('salir/', views.salir, name='salir'),
     path('detalleProducto/<int:id>', views.detalleProducto, name='detalleProducto'),
 
+    # CRUD POLOS
+    path('verpolos/', vproducto.ver_polos, name='verpolos'),
+    path('agregarpolo/', vproducto.agregar_polo, name='agregarpolo'),
+    path('editarpolo/<int:id>', vproducto.editar_polo, name='editarpolo'),
+    path('eliminarpolo/<int:id>', vproducto.eliminar_polo, name='eliminarpolo'),
+
+    # CRUD TALLAS
+    path('vertallas/', vproducto.ver_tallas, name='vertallas'),
+    path('agregartalla/', vproducto.agregar_talla, name='agregartalla'),
+    path('editartalla/<int:id>', vproducto.editar_talla, name='editartalla'),
+    path('eliminartalla/<int:id>', vproducto.eliminar_talla, name='eliminartalla'),
+
+    # CRUD CATEGORIAS
+    path('vercategorias/', vproducto.ver_categorias, name='vercategorias'),
+    path('agregarcategoria/', vproducto.agregar_categoria, name='agregarcategoria'),
+    path('editarcategoria/<int:id>', vproducto.editar_categoria, name='editarcategoria'),
+    path('eliminarcategoria/<int:id>', vproducto.eliminar_categoria, name='eliminarcategoria'),
+
+    # CRUD CATEGORIAS
+    path('vercolores/', vproducto.ver_colores, name='vercolores'),
+    path('agregarcolor/', vproducto.agregar_color, name='agregarcolor'),
+    path('editarcolor/<int:id>', vproducto.editar_color, name='editarcolor'),
+    path('eliminarcolor/<int:id>', vproducto.eliminar_color, name='eliminarcolor'),
+
+    # CRUD MATERIALES
+    path('vermateriales/', vproducto.ver_materiales, name='vermateriales'),
+    path('agregarmaterial/', vproducto.agregar_material, name='agregarmaterial'),
+    path('editarmaterial/<int:id>', vproducto.editar_material, name='editarmaterial'),
+    path('eliminarmaterial/<int:id>', vproducto.eliminar_material, name='eliminarmaterial'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,14 +1,11 @@
 from django.core.paginator import Paginator
-from django.http import HttpResponse
-from django.shortcuts import render
-
-import producto
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from producto.models import Producto
 
 
 # Create your views here.
-
-
 def inicio(request):
     return render(request, 'paginas/inicio.html')
 
@@ -19,6 +16,16 @@ def nosotros(request):
 
 def contacto(request):
     return render(request, 'paginas/contacto.html')
+
+
+@login_required
+def administrar(request):
+    return render(request, 'paginas/administrar.html')
+
+
+def salir(request):
+    logout(request)
+    return redirect('/')
 
 
 def catalogo(request):
@@ -35,6 +42,8 @@ def catalogo(request):
 
     return render(request, 'catalogo.html', {'productos': productos})
 
+
 def detalleProducto(request, id):
-    producto = Producto.objects.get(pk=id)
-    return render(request, 'detalleProducto.html', {'producto':producto})
+    # producto = Producto.objects.get(pk=id)
+    producto = get_object_or_404(Producto, pk=id)
+    return render(request, 'detalleProducto.html', {'producto': producto})

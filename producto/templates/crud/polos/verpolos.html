@@ -1,0 +1,50 @@
+{% extends "baseAdministracion.html" %}
+{% block titulo %} Administracion | Indie Prints{% endblock %}
+{% block contenedor %}
+<section class="section">
+    <div class="container">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="subtitle"><strong>Lista de Polos: {{cantidad_polos}}</strong></h1>
+            <a href="/agregarpolo/" class="button is-primary"><strong>Agregar Polo</strong></a>
+        </div>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Talla</th>
+                    <th>Material</th>
+                    <th>Color</th>
+                    <th>Categoria</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for polo in polos %}
+            <tbody>
+                <tr>
+                    <td>
+                      <a href="#">
+                        <img src="{{ polo.imagen.url }}" alt="Imagen de {{ polo.nombre }}">
+                      </a>
+                    </td>
+                    <td>{{ polo.nombre }}</td>
+                    <td>{{ polo.talla }}</td>
+                    <td>{{ polo.material }}</td>
+                    <td>{{ polo.color }}</td>
+                    <td>{{ polo.categoria }}</td>
+                    <td>{{ polo.precio }}</td>
+                    <td>{{ polo.stock }}</td>
+                    <td>
+                        <a href="/editarpolo/{{polo.id}}" class="button is-small is-fullwidth is-link is-outlined"><strong>Editar</strong></a>
+                        <a href="/eliminarpolo/{{polo.id}}" class="button is-small is-fullwidth is-danger is-outlined"><strong>Eliminar</strong></a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    <a href="/administrar" class="button is-small is-fullwidth is-link is-outlined"><strong>VOLVER</strong></a>
+</section>
+{% endblock %}

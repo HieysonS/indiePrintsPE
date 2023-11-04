@@ -1,0 +1,16 @@
+{% extends "baseAdministracion.html" %}
+{% block titulo %} Agregar | Indie Prints{% endblock %}
+{% block contenedor %}
+<div class="container">
+    <form method="post">
+        <table>
+            {{formaColor}}
+        </table>
+        <div class="buttons is-justify-content-space-between">
+         <a href="/vercolores/" class="button is-danger">Cancelar<a/>
+         <button class="button is-success" type="submit">Guardar Color</button>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}
