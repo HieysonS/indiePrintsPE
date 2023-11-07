@@ -63,6 +63,9 @@ urlpatterns = [
     path('editarmaterial/<int:id>', vproducto.editar_material, name='editarmaterial'),
     path('eliminarmaterial/<int:id>', vproducto.eliminar_material, name='eliminarmaterial'),
 
+    #CARRITO DE COMPRAS
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

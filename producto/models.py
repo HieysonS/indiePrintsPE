@@ -51,3 +51,34 @@ class Producto(models.Model):
     def delete(self, using=None, keep_parents=False):
         self.imagen.storage.delete(self.imagen.name)
         super().delete()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Carrito(models.Model):
+    session_key = models.CharField(max_length=32)
+    creado_en = models.DateTimeField(auto_now_add=True)
+
+
+class ItemCarrito(models.Model):
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+
+
+
