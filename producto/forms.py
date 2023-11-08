@@ -31,3 +31,9 @@ class MaterialForm(ModelForm):
     class Meta:
         model = Material
         fields = '__all__'
+
+
+class PedidoForm(ModelForm):
+    class Meta:
+        model = Pedido
+        fields = '__all__'

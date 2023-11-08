@@ -1,29 +1,25 @@
 {% extends "base.html" %}
 {% block titulo %} Productos | Indie Prints{% endblock %}
 {% block contenedor %}
-<article class="media">
-    <div class="media-content">
-        <figure class="media-left" style="object-fit: cover; width: 100%; height: 100%;">
-            <p class="image is-128x128" style="overflow: hidden;">
-                <img alt="Imagen de {{ producto.nombre }}" src="{{ producto.imagen.url }}">
-            </p>
-        </figure>
-    </div>
+<article class="media" style="align-items: flex-start;">
+    <figure class="media-left">
+        <p class="image is-128x128">
+            <img alt="Imagen de {{ producto.name }}" src="{{ producto.image.url }}">
+        </p>
+    </figure>
     <div class="media-content">
         <div class="content">
-            <h1><strong>{{producto.nombre}}</strong></h1>
-            <h3><strong>Talla:</strong> {{producto.talla}}</h3>
-            <h3><strong>Precio:</strong> S/. {{producto.precio}}</h3>
+            <h1><strong>{{producto.name}}</strong></h1>
+            <h6><strong>Talla:</strong> {{producto.talla}} | <strong>Precio:</strong> S/. {{producto.price}}</h6>
             {% if producto.stock == 0 %}
-                <h3 style="color: red">Stock: Agotado.</h3>
+                <h5 style="color: red">Stock: Agotado.</h5>
             {% else %}
-                <h3>Stock: {{producto.stock}} unidades.</h3>
+                <h5>Stock: {{producto.stock}} unidades.</h5>
             {% endif %}
         </div>
-        <div class="buttons is-justify-content-space-between">
-            <a class="button is-succes" href="#">Añadir al carrito<a/>
+        <div class="buttons">
+            <a class="button is-succes" href="{% url 'cart_add' producto.id %}">Añadir al carrito<a/>
         </div>
-
     </div>
     <div class="media-right">
         <a href="/catalogo" class="delete"></a>

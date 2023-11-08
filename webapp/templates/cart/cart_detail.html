@@ -1,0 +1,63 @@
+{% extends "baseCarrito.html" %}
+{% block titulo %} Productos | Indie Prints{% endblock %}
+{% block contenedor %}
+{% load cart_tag %}
+{% load cart_extras %}
+<section class="section">
+    <div class="container">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a class="button is-primary" href="/catalogo"><strong>Ver mas productos</strong></a>
+        </div>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+            <th>TOTAL CARRITO: {{ request.session.cart|cart_total }}
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio unidad</th>
+                    <th>Sub Total</th>
+                </tr>
+            </th>
+            </thead>
+            {% for key,value in request.session.cart.items %}
+            <tbody>
+            <tr>
+                <td>{{ value.image }}</td>
+                <td>{{ value.name }}</td>
+                <td style="text-align: right; width: 1%; white-space: nowrap;">
+                    <a class="button is-small is-danger is-outlined" href="{% url 'item_decrement' value.product_id %}"><strong>-</strong></a>
+                    {{ value.quantity }}
+                    <a class="button is-small is-primary is-outlined" href="{% url 'item_increment' value.product_id %}"><strong>+</strong></a>
+                </td>
+                <td>{{ value.price }}</td>
+                <td>{{ value.price|multiply:value.quantity }}</td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+    <a class="button is-small is-fullwidth is-danger is-outlined" style="width: 49%;" href="{% url 'cart_clear' %}"><strong>Eliminar todos los productos del carrito</strong></a>
+    <a class="button is-small is-fullwidth is-link is-outlined" style="width: 49%;" href="/catalogo"><strong>Continuar comprando</strong></a>
+    </div>
+    <br/>
+    <div class="container">
+        <button id="openIframe" class="button is-primary">Comprar</button>
+        <button id="closeIframe" class="button is-danger">Cancelar</button>
+        <div id="iframeContainer" style="display: none;">
+            <iframe id="myIframe" src="https://github.com/HieysonS/IndiePrintsImagenes/blob/main/DepoNoRe.PNG?raw=true" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+        $("#openIframe").click(function(){
+            $("#iframeContainer").show();
+        });
+        $("#closeIframe").click(function(){
+            $("#iframeContainer").hide();
+        });
+    });
+</script>
+{% endblock %}

@@ -73,14 +73,14 @@
                     <div class="card-image">
                         <figure class="image is-4by5">
                             <a href="detalleProducto/{{producto.id}}">
-                                <img alt="Imagen de {{ producto.nombre }}" src="{{ producto.imagen.url }}">
+                                <img alt="Imagen de {{ producto.name }}" src="{{ producto.image.url }}">
                             </a>
                         </figure>
                     </div>
                     <div class="card-content">
-                        <p class="title is-4">{{ producto.nombre }}</p>
+                        <p class="title is-4">{{ producto.name }}</p>
                         <p class="subtitle is-10">Talla: {{ producto.talla }}</p>
-                        <p class="subtitle is-10">S/. {{ producto.precio}}</p>
+                        <p class="subtitle is-10">S/. {{ producto.price}}</p>
                     </div>
                 </div>
             </div>

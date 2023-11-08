@@ -1,0 +1,46 @@
+{% extends "baseAdministracion.html" %}
+{% block titulo %} Administracion | Indie Prints{% endblock %}
+{% block contenedor %}
+<section class="section">
+    <div class="container">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="subtitle"><strong>Lista de Pedidos: {{cantidad_pedidos}}</strong></h1>
+            <a class="button is-primary" href="/administrar"><strong>Menu principal</strong></a>
+        </div>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+            <tr>
+                <th>DNI</th>
+                <th>Cliente</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Email</th>
+                <th>ID Carrito</th>
+                <th>PAGO</th>
+                <th>ESTADO</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            {% for pedido in pedidos %}
+            <tbody>
+            <tr>
+                <td>{{ pedido.dni }}</td>
+                <td>{{ pedido.nombre }} {{ pedido.apellido_paterno }} {{ pedido.apellido_materno }}</td>
+                <td>{{ pedido.direccion }}</td>
+                <td>{{ pedido.telefono }}</td>
+                <td>{{ pedido.email }}</td>
+                <td>{{ pedido.commpra }}</td>
+                <td>{{ pedido.total }}</td>
+                <td>{{ pedido.estado }}</td>
+                <td style="text-align: right; width: 1%; white-space: nowrap;">
+                    <a class="button is-small is-link is-outlined"
+                       href="/editarpedido/{{pedido.id}}"><strong>Editar</strong></a>
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    <a class="button is-small is-fullwidth is-link is-outlined" href="/administrar"><strong>VOLVER</strong></a>
+</section>
+{% endblock %}

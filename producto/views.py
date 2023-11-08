@@ -9,7 +9,7 @@ from producto.models import *
 
 def ver_polos(request):
     cantidad_polos = Producto.objects.count()
-    polos = Producto.objects.order_by('nombre')
+    polos = Producto.objects.order_by('name')
     # polos = get_object_or_404(Producto, pk=id)
     return render(request, 'crud/polos/verpolos.html', {'cantidad_polos': cantidad_polos, 'polos': polos})
 
@@ -194,4 +194,21 @@ def eliminar_material(request, id):
         material.delete()
     return redirect('/vermateriales')
 
+
+def ver_pedidos(request):
+    cantidad_pedidos = Pedido.objects.count()
+    pedidos = Pedido.objects.order_by('id')
+    return render(request, 'crud/pedidos/verpedidos.html', {'cantidad_pedidos': cantidad_pedidos, 'pedidos': pedidos})
+
+
+def editar_pedidos(request, id):
+    pedido = get_object_or_404(Color, pk=id)
+    if request.method == 'POST':
+        formaPedido = PedidoForm(request.POST, instance=pedido)
+        if formaPedido.is_valid():
+            formaPedido.save()
+            return redirect('verpedidos')
+    else:
+        formaPedido = PedidoForm(instance=pedido)
+    return render(request, 'crud/pedidos/editarpedidos.html', {'formaPedido': formaPedido})
 

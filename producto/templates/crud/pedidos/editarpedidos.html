@@ -1,0 +1,16 @@
+{% extends "baseAdministracion.html" %}
+{% block titulo %} Editar | Indie Prints{% endblock %}
+{% block contenedor %}
+<div class="container">
+    <form method="post">
+        <table>
+            {{formaPedido}}
+        </table>
+        <div class="buttons is-justify-content-space-between">
+            <a class="button is-danger" href="/verpedidos/">Cancelar<a/>
+                <button class="button is-success" type="submit">Guardar Color</button>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}
