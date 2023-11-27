@@ -1,0 +1,89 @@
+{% extends "baseCarrito.html" %}
+{% block titulo %} Productos | Indie Prints{% endblock %}
+{% block contenedor %}
+{% load cart_extras %}
+{% load static %}
+<section class="section">
+    <div class="container">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a class="button is-primary" href="/catalogo"><strong>Ver mas productos</strong></a>
+        </div>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            {% if carrito %}
+            <thead>
+            <th>
+                <tr>
+                    <th>#</th>
+                    <th>Producto</th>
+                    <th>Talla</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </th>
+            </thead>
+            {% for item in carrito.carritoproducto_set.all %}
+            <tbody>
+            <tr>
+                <td style="display: flex; justify-content: center;">
+                    <img class="image is-48x48" src="{{ item.producto.image.url }}" alt="{{ item.producto.name }}">
+                </td>
+                <td>{{ item.producto.name }}</td>
+                <td>{{ item.producto.talla }}</td>
+                <td style="text-align: right; width: 1%; white-space: nowrap;">
+                    <a class="button is-small is-danger is-outlined" href="{% url 'disminuir_cantidad' item.id %}"><strong>-</strong></a>
+                    {{ item.cantidad }}
+                    <a class="button is-small is-primary is-outlined" href="{% url 'aumentar_cantidad' item.id %}"><strong>+</strong></a>
+                </td>
+                <td>{{ item.producto.precio_con_descuento }}</td>
+                <td>{{ item.subtotal }}</td>
+                <td><a class="button is-small is-danger is-outlined" href="{% url 'eliminar_producto' item.id %}"><strong>Eliminar</strong></a></td>
+            </tr>
+            </tbody>
+            {% endfor %}
+            {% else %}
+                <br>
+                <p>Tu carrito está vacío.</p>
+            {% endif %}
+        </table>
+    </div>
+    <br/>
+    <div style="display: flex; justify-content: space-between;">
+    <a class="button is-small is-fullwidth is-danger is-outlined" style="width: 49%;" href="{% url 'eliminar_carrito' %}"><strong>Eliminar carrito</strong></a>
+    <a class="button is-small is-fullwidth is-danger is-outlined" style="width: 49%;" href="{% url 'vaciar_carrito' %}"><strong>Vaciar carrito</strong></a>
+    <a class="button is-small is-fullwidth is-link is-outlined" style="width: 49%;" href="/catalogo"><strong>Continuar comprando</strong></a>
+    </div>
+    <br/>
+
+    <button id="botonPagar" class="button is-small is-success is-link is-fullwidth">Pagar S/.{{ carrito.subtotal }}</button>
+    <button id="botonCancelar" style="display: none;" class="button is-small is-link is-danger is-fullwidth">Cancelar pago</button>
+
+    <div class="contenedor" id="contenedor" style="display: none;">
+        <form method="POST" action="{% url 'crear_pedido' %}">
+            {% csrf_token %}
+            <input class="input is-rounded" type="text" name="dni" placeholder="DNI"></br>
+            <input class="input is-rounded" type="text" name="nombre" placeholder="Nombre"></br>
+            <input class="input is-rounded" type="text" name="apellido_paterno" placeholder="Apellido Paterno"></br>
+            <input class="input is-rounded" type="text" name="apellido_materno" placeholder="Apellido Materno"></br>
+            <input class="input is-rounded" type="text" name="direccion" placeholder="Dirección"></br>
+            <input class="input is-rounded" type="text" name="telefono" placeholder="Teléfono"></br>
+            <input class="input is-rounded" type="email" name="email" placeholder="Email"></br>
+            <input type="hidden" name="carrito" value="{{ carrito.id }}"></br> <!-- Asegúrate de que este es el ID del carrito -->
+            <input type="hidden" name="estado" value="{{ estado.id }}"></br> <!-- Asegúrate de que este es el ID del estado -->
+            <button class="button is-success is-rounded" type="submit">Terminar compra</button>
+        </form>
+    </div>
+</section>
+<script>
+        document.getElementById('botonPagar').addEventListener('click', function() {
+            document.getElementById('contenedor').style.display = 'block';
+            document.getElementById('botonPagar').style.display = 'none';
+            document.getElementById('botonCancelar').style.display = 'block';
+        });
+        document.getElementById('botonCancelar').addEventListener('click', function() {
+            document.getElementById('contenedor').style.display = 'none';
+            document.getElementById('botonPagar').style.display = 'block';
+            document.getElementById('botonCancelar').style.display = 'none';
+        });
+</script>
+{% endblock %}

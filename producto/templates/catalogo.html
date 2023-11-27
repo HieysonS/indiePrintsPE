@@ -8,6 +8,7 @@
             <p class="menu-label">Filtro</p>
             <form method="get" action="{% url 'catalogo' %}">
                 Categoria:
+                <br/>
                 <div class="select is-rounded">
                     <select name="categoria">
                         <option value="">Todos</option>
@@ -18,6 +19,20 @@
                         {% endfor %}
                     </select>
                 </div>
+                <br/>
+                Material:
+                <br/>
+                <div class="select is-rounded">
+                    <select name="material">
+                        <option value="">Todos</option>
+                        {% for material in materiales %}
+                        <option value="{{material.id}}" {% if material.id|stringformat:"s" == request.GET.material %}selected{% endif %}>
+                            {{material.nombreMaterial}}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br/>
                 Color:
                 <br/>
                 <div class="select is-rounded">
@@ -43,6 +58,7 @@
                         {% endfor %}
                     </select>
                 </div>
+                <br>
                 <br>
                 <div class="buttons">
                   <button class="button is-success">FILTRAR</button>
@@ -80,7 +96,12 @@
                     <div class="card-content">
                         <p class="title is-4">{{ producto.name }}</p>
                         <p class="subtitle is-10">Talla: {{ producto.talla }}</p>
-                        <p class="subtitle is-10">S/. {{ producto.price}}</p>
+                        {% if producto.descuento %}
+                            <p class="subtitle is-10"><del>Antes: S/. {{ producto.price }}</del></p>
+                            <p class="subtitle is-10">Ahora: S/. {{ producto.precio_con_descuento }}</p>
+                        {% else %}
+                            <p class="subtitle is-10">Precio: S/. {{ producto.price }}</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>

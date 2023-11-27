@@ -50,7 +50,7 @@ urlpatterns = [
     path('editarcategoria/<int:id>', vproducto.editar_categoria, name='editarcategoria'),
     path('eliminarcategoria/<int:id>', vproducto.eliminar_categoria, name='eliminarcategoria'),
 
-    # CRUD CATEGORIAS
+    # CRUD COLORES
     path('vercolores/', vproducto.ver_colores, name='vercolores'),
     path('agregarcolor/', vproducto.agregar_color, name='agregarcolor'),
     path('editarcolor/<int:id>', vproducto.editar_color, name='editarcolor'),
@@ -62,18 +62,22 @@ urlpatterns = [
     path('editarmaterial/<int:id>', vproducto.editar_material, name='editarmaterial'),
     path('eliminarmaterial/<int:id>', vproducto.eliminar_material, name='eliminarmaterial'),
 
-    # CARRITO DE COMPRAS
-    path('cart/add/<int:id>/', views.cart_add, name='cart_add'),
-    path('cart/item_clear/<int:id>/', views.item_clear, name='item_clear'),
-    path('cart/item_increment/<int:id>/', views.item_increment, name='item_increment'),
-    path('cart/item_decrement/<int:id>/', views.item_decrement, name='item_decrement'),
-    path('cart/cart_clear/', views.cart_clear, name='cart_clear'),
-    path('cart/cart_detail/', views.cart_detail, name='cart_detail'),
-    path('cart/payment_form', views.payment_form, name='payment_form'),
-
     # ADMINISTRAR PEDIDOS
     path('verpedidos/', vproducto.ver_pedidos, name='verpedidos'),
     path('editarpedido/<int:id>', vproducto.editar_pedidos, name='editarpedido'),
+
+    # CARRITO
+    path('producto_a_carrito/<int:producto_id>/', views.producto_a_carrito, name='producto_a_carrito'),
+    path('mostrar_carrito/', views.mostrar_carrito, name='mostrar_carrito'),
+    path('vaciar_carrito/', views.vaciar_carrito, name='vaciar_carrito'),
+    path('eliminar_carrito/', views.eliminar_carrito, name='eliminar_carrito'),
+    path('aumentar_cantidad/<int:producto_id>/', views.aumentar_cantidad, name='aumentar_cantidad'),
+    path('disminuir_cantidad/<int:producto_id>/', views.disminuir_cantidad, name='disminuir_cantidad'),
+    path('eliminar_producto/<int:producto_id>/', views.eliminar_producto, name='eliminar_producto'),
+
+    # COMPRAR PEDIDO
+    path('crear_pedido/', views.crear_pedido, name='crear_pedido'),
+    path('detalles_carrito/<int:carrito_id>/', views.detalles_carrito, name='detalles_carrito'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

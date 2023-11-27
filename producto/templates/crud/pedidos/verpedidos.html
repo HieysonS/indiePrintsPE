@@ -15,7 +15,7 @@
                 <th>Direccion</th>
                 <th>Telefono</th>
                 <th>Email</th>
-                <th>ID Carrito</th>
+                <th>Compra</th>
                 <th>PAGO</th>
                 <th>ESTADO</th>
                 <th>Acciones</th>
@@ -29,8 +29,31 @@
                 <td>{{ pedido.direccion }}</td>
                 <td>{{ pedido.telefono }}</td>
                 <td>{{ pedido.email }}</td>
-                <td>{{ pedido.commpra }}</td>
-                <td>{{ pedido.total }}</td>
+                <td style="text-align: right; width: 1%; white-space: nowrap;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in pedido.carrito.carritoproducto_set.all %}
+                                <tr>
+                                    <td style="justify-content: center;">
+                                        <img src="{{ item.producto.image.url }}" alt="{{ item.producto.name }}">
+                                    </td>
+                                    <td>{{ item.producto.name }}</td>
+                                    <td>{{ item.cantidad }}</td>
+                                    <td>{{ item.producto.precio_con_descuento }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+                <td>{{ pedido.subtotal }}</td>
                 <td>{{ pedido.estado }}</td>
                 <td style="text-align: right; width: 1%; white-space: nowrap;">
                     <a class="button is-small is-link is-outlined"

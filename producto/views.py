@@ -32,9 +32,9 @@ def editar_polo(request, id):
     if request.method == 'POST':
         formaPolo = PoloForm(request.POST, request.FILES, instance=polo)
         if formaPolo.is_valid():
-            if 'imagen' in request.FILES:
-                if polo.imagen:
-                    os.remove(polo.imagen.path)
+            if 'image' in request.FILES:
+                if polo.image:
+                    os.remove(polo.image.path)
             formaPolo.save()
             return redirect('verpolos')
     else:
@@ -45,8 +45,8 @@ def editar_polo(request, id):
 def eliminar_polo(request, id):
     polo = get_object_or_404(Producto, pk=id)
     if polo:
-        if polo.imagen:
-            os.remove(polo.imagen.path)
+        if polo.image:
+            os.remove(polo.image.path)
         polo.delete()
     return redirect('verpolos')
 
@@ -202,7 +202,7 @@ def ver_pedidos(request):
 
 
 def editar_pedidos(request, id):
-    pedido = get_object_or_404(Color, pk=id)
+    pedido = get_object_or_404(Pedido, pk=id)
     if request.method == 'POST':
         formaPedido = PedidoForm(request.POST, instance=pedido)
         if formaPedido.is_valid():

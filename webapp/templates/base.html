@@ -1,5 +1,4 @@
 {% load static %}
-{% load cart_tag %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,6 +8,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+      #descuentos {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: rgb(129, 235, 110);
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        text-align: center;
+        margin: 10px;
+    }
+    </style>
   </head>
   <body>
   <hr/>
@@ -49,12 +66,18 @@
       {% block contenedor %} {% endblock %}
   </div>
   <div class="shopping-cart" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background-color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 5px rgba(0, 0, 0,0)">
-    <a href="/cart/cart_detail/">
+    <a href="/mostrar_carrito">
       <i class="fas fa-shopping-cart fa-2x">
-        <span style="position: relative; top: -50px; right: -30px; padding: 1px 5px; border-radius: 50%; background-color: black; color: white; font-size: 15px;">{{request.session.cart|length}}</span>
+        <span style="position: relative; top: -50px; right: -30px; padding: 1px 5px; border-radius: 50%; background-color: black; color: white; font-size: 15px;">{{ cantidad_total }}</span>
       </i>
     </a>
   </div>
+  <div id="descuentos">
+    <a href="https://wa.me/51982212165" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 48px; height: 48px;">
+    </a>
+  </div>
+
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
@@ -65,8 +88,8 @@
        <p style="text-align: center">
        234, Huancayo,<br />
                       Pais, PE<br />
-       Call: +51 927183375<br>
-       Email: IndiePrints@gmail.com<br>
+       Call: +51 982 212 165<br>
+       Email: indieprintscontacto@gmail.com<br>
          <strong>2023 www.IndiePrints.pe | All Right Reserved</strong>
        </p>
     </div>

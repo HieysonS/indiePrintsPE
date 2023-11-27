@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'webapp',
     'producto',
-    'cart',
 ]
 
 MIDDLEWARE = [
@@ -63,13 +62,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.context_processor.cart_total_amount'
+                'webapp.context_processors.carrito_cantidad',
             ],
         },
     },
 ]
 
-CART_SESSION_ID = 'cart'
 X_FRAME_OPTIONS = 'ALLOWALL'
 
 WSGI_APPLICATION = 'indiePrints.wsgi.application'
@@ -87,7 +85,7 @@ WSGI_APPLICATION = 'indiePrints.wsgi.application'
 DATABASES = {  # CONEXIÓN CON LA BASE DE DATOS
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'indiePrints_db',
+        'NAME': 'indiePrintsDB',
         'USER': 'postgres',
         'PASSWORD': 'admin',
         'HOST': 'localhost',

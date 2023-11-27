@@ -24,9 +24,11 @@
             {% for polo in polos %}
             <tbody>
             <tr>
-                <td>
-                    <a href="#">
-                        <img alt="Imagen de {{ polo.name }}" src="{{ polo.image.url }}">
+                <td style="text-align: center;">
+                    <a href="/editarpolo/{{polo.id}}">
+                        <figure class="image is-96x96" style="display: inline-block;">
+                            <img alt="Imagen de {{ polo.name }}" src="{{ polo.image.url }}">
+                        </figure>
                     </a>
                 </td>
                 <td>{{ polo.name }}</td>
