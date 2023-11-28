@@ -86,20 +86,6 @@ def detalleProducto(request, id):
     producto = get_object_or_404(Producto, pk=id)
     return render(request, 'detalleProducto.html', {'producto': producto})
 
-@xframe_options_exempt
-def payment_form(request):
-    if 'carrito' not in request.session or not request.session['carrito']:
-        return redirect('/cart_detail')
-    if request.method == 'POST':
-        formaPedido = PedidoForm(request.POST)
-        if formaPedido.is_valid():
-            formaPedido.save()
-            return redirect('catalogo')
-    else:
-        formaPedido = PedidoForm()
-    total_pago = cart_total()
-    return render(request, 'carrito/payment_form.html', {'total_pago': total_pago, 'formaPedido': formaPedido})
-
 
 def producto_a_carrito(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)

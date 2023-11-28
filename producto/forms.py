@@ -33,6 +33,12 @@ class MaterialForm(ModelForm):
         fields = '__all__'
 
 
+class DescuentoForm(ModelForm):
+    class Meta:
+        model = Descuento
+        fields = '__all__'
+
+
 class PedidoForm(ModelForm):
     class Meta:
         model = Pedido

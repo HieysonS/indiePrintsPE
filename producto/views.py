@@ -1,4 +1,5 @@
 import os
+
 from django.shortcuts import render, get_object_or_404, redirect
 from producto.forms import *
 from producto.models import *
@@ -195,6 +196,42 @@ def eliminar_material(request, id):
     return redirect('/vermateriales')
 
 
+def ver_descuentos(request):
+    cantidad_descuentos = Descuento.objects.count()
+    descuentos = Descuento.objects.order_by('valor')
+    return render(request, 'crud/descuento/verdescuentos.html', {'cantidad_descuentos': cantidad_descuentos, 'descuentos': descuentos})
+
+
+def agregar_descuento(request):
+    if request.method == 'POST':
+        formaDescuento = DescuentoForm(request.POST)
+        if formaDescuento.is_valid():
+            formaDescuento.save()
+            return redirect('verdescuentos')
+    else:
+        formaDescuento = DescuentoForm()
+    return render(request, 'crud/descuento/agregardescuento.html', {'formaDescuento': formaDescuento})
+
+
+def editar_descuento(request, id):
+    descuento = get_object_or_404(Descuento, pk=id)
+    if request.method == 'POST':
+        formaDescuento = DescuentoForm(request.POST, instance=descuento)
+        if formaDescuento.is_valid():
+            formaDescuento.save()
+            return redirect('verdescuentos')
+    else:
+        formaDescuento = DescuentoForm(instance=descuento)
+    return render(request, 'crud/descuento/editardescuento.html', {'formaDescuento': formaDescuento})
+
+
+def eliminar_descuento(request, id):
+    descuento = get_object_or_404(Descuento, pk=id)
+    if descuento:
+        descuento.delete()
+    return redirect('/verdescuentos')
+
+
 def ver_pedidos(request):
     cantidad_pedidos = Pedido.objects.count()
     pedidos = Pedido.objects.order_by('id')
@@ -211,4 +248,11 @@ def editar_pedidos(request, id):
     else:
         formaPedido = PedidoForm(instance=pedido)
     return render(request, 'crud/pedidos/editarpedidos.html', {'formaPedido': formaPedido})
+
+
+def eliminar_pedido(request, id):
+    pedido = get_object_or_404(Pedido, pk=id)
+    if pedido:
+        pedido.delete()
+    return redirect('/verpedidos')
 

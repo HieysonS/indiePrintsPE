@@ -86,6 +86,18 @@
             {% for producto in productos %}
             <div class="column is-one-third">
                 <div class="card">
+                    {% if producto.descuento %}
+                    <div class="card-image">
+                        <figure class="image is-4by5">
+                            <a href="detalleProducto/{{producto.id}}">
+                                <img alt="Imagen de {{ producto.name }}" src="{{ producto.image.url }}">
+                                <div class="notification is-primary has-text-centered" style="position: absolute; top: 5%; left: 80%; transform: translate(-50%, -50%); border-radius: 50%; width: 100px; height: 40px;">
+                                    <img src="https://github.com/HieysonS/IndiePrintsImagenes/blob/main/ofertas.png?raw=true" alt="Oferta">
+                                </div>
+                            </a>
+                        </figure>
+                    </div>
+                    {% else %}
                     <div class="card-image">
                         <figure class="image is-4by5">
                             <a href="detalleProducto/{{producto.id}}">
@@ -93,6 +105,7 @@
                             </a>
                         </figure>
                     </div>
+                    {% endif %}
                     <div class="card-content">
                         <p class="title is-4">{{ producto.name }}</p>
                         <p class="subtitle is-10">Talla: {{ producto.talla }}</p>

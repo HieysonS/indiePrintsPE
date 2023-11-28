@@ -1,15 +1,16 @@
 {% extends "baseAdministracion.html" %}
-{% block titulo %} Editar | Indie Prints{% endblock %}
+{% block titulo %} Agregar | Indie Prints{% endblock %}
 {% block contenedor %}
+{% load static %}
 <div class="container">
     <form method="post">
         <table>
-            {{formaPedido}}
+            {{formaDescuento}}
         </table>
         <br>
         <div class="buttons is-justify-content-space-between">
-            <a class="button is-danger" href="/verpedidos/">Cancelar<a/>
-                <button class="button is-success" type="submit">Guardar Pedido</button>
+            <a class="button is-danger" href="/verdescuentos/">Cancelar<a/>
+                <button class="button is-success" type="submit">Guardar categoria</button>
         </div>
         {% csrf_token %}
     </form>

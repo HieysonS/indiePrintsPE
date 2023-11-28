@@ -1,0 +1,32 @@
+{% extends "baseAdministracion.html" %}
+{% block titulo %} Administracion | Indie Prints{% endblock %}
+{% block contenedor %}
+<section class="section">
+    <div class="container">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="subtitle"><strong>Lista de Descuentos: {{cantidad_descuentos}}</strong></h1>
+            <a class="button is-primary" href="/agregardescuento/"><strong>Agregar Descuento</strong></a>
+        </div>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+            <tr>
+                <th>Valor</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            {% for descuento in descuentos %}
+            <tbody>
+            <tr>
+                <td>{{ descuento.valor }}%</td>
+                <td style="text-align: right; width: 1%; white-space: nowrap;">
+                    <a class="button is-small is-link is-outlined" href="/editardescuento/{{descuento.id}}"><strong>Editar</strong></a>
+                    <a class="button is-small is-danger is-outlined" href="/eliminardescuento/{{descuento.id}}"><strong>Eliminar</strong></a>
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    <a class="button is-small is-fullwidth is-link is-outlined" href="/administrar"><strong>VOLVER</strong></a>
+</section>
+{% endblock %}

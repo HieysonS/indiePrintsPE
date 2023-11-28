@@ -4,12 +4,12 @@
 <div class="container">
     <form enctype="multipart/form-data" method="post">
         <table>
-            {{formaPolo}}
+            {{formaDescuento}}
         </table>
         <br>
         <div class="buttons is-justify-content-space-between">
-            <a class="button is-danger" href="/verpolos/">Cancelar<a/>
-                <button class="button is-success" type="submit">Guardar polo</button>
+            <a class="button is-danger" href="/verdescuentos/">Cancelar<a/>
+                <button class="button is-success" type="submit">Guardar Descuento</button>
         </div>
         {% csrf_token %}
     </form>

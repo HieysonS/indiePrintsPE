@@ -54,24 +54,30 @@
     <a class="button is-small is-fullwidth is-link is-outlined" style="width: 49%;" href="/catalogo"><strong>Continuar comprando</strong></a>
     </div>
     <br/>
-
-    <button id="botonPagar" class="button is-small is-success is-link is-fullwidth">Pagar S/.{{ carrito.subtotal }}</button>
-    <button id="botonCancelar" style="display: none;" class="button is-small is-link is-danger is-fullwidth">Cancelar pago</button>
-
+    <button id="botonPagar" class="button is-small is-success is-link is-fullwidth"><STRONG>PAGAR: S/.{{ carrito.subtotal }}</STRONG></button>
+    <button id="botonCancelar" style="display: none;" class="button is-small is-link is-danger is-fullwidth">CANCELAR COMPRA</button>
+    <br/>
     <div class="contenedor" id="contenedor" style="display: none;">
-        <form method="POST" action="{% url 'crear_pedido' %}">
-            {% csrf_token %}
-            <input class="input is-rounded" type="text" name="dni" placeholder="DNI"></br>
-            <input class="input is-rounded" type="text" name="nombre" placeholder="Nombre"></br>
-            <input class="input is-rounded" type="text" name="apellido_paterno" placeholder="Apellido Paterno"></br>
-            <input class="input is-rounded" type="text" name="apellido_materno" placeholder="Apellido Materno"></br>
-            <input class="input is-rounded" type="text" name="direccion" placeholder="Dirección"></br>
-            <input class="input is-rounded" type="text" name="telefono" placeholder="Teléfono"></br>
-            <input class="input is-rounded" type="email" name="email" placeholder="Email"></br>
-            <input type="hidden" name="carrito" value="{{ carrito.id }}"></br> <!-- Asegúrate de que este es el ID del carrito -->
-            <input type="hidden" name="estado" value="{{ estado.id }}"></br> <!-- Asegúrate de que este es el ID del estado -->
-            <button class="button is-success is-rounded" type="submit">Terminar compra</button>
-        </form>
+        <div style="display: flex; justify-content: space-between; flex: 1">
+            <div>
+                <form method="POST" action="{% url 'crear_pedido' %}">
+                    {% csrf_token %}
+                    <input class="input is-rounded" type="text" name="dni" placeholder="DNI"></br>
+                    <input class="input is-rounded" type="text" name="nombre" placeholder="Nombre"></br>
+                    <input class="input is-rounded" type="text" name="apellido_paterno" placeholder="Apellido Paterno"></br>
+                    <input class="input is-rounded" type="text" name="apellido_materno" placeholder="Apellido Materno"></br>
+                    <input class="input is-rounded" type="text" name="direccion" placeholder="Dirección"></br>
+                    <input class="input is-rounded" type="text" name="telefono" placeholder="Teléfono"></br>
+                    <input class="input is-rounded" type="email" name="email" placeholder="Email"></br>
+                    <input type="hidden" name="carrito" value="{{ carrito.id }}"></br>
+                    <input type="hidden" name="estado" value="{{ estado.id }}">
+                    <button class="button is-success is-rounded" type="submit"><strong>TERMINAR COMPRA: S/.{{ carrito.subtotal }}</strong></button>
+                </form>
+            </div>
+            <div>
+                <img src="https://github.com/HieysonS/IndiePrintsImagenes/blob/main/metodoPago.PNG?raw=true" alt="metodos de pago">
+            </div>
+        </div>
     </div>
 </section>
 <script>

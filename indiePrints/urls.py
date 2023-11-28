@@ -62,9 +62,16 @@ urlpatterns = [
     path('editarmaterial/<int:id>', vproducto.editar_material, name='editarmaterial'),
     path('eliminarmaterial/<int:id>', vproducto.eliminar_material, name='eliminarmaterial'),
 
+    # CRUD DESCUENTOS
+    path('verdescuentos/', vproducto.ver_descuentos, name='verdescuentos'),
+    path('agregardescuento/', vproducto.agregar_descuento, name='agregardescuento'),
+    path('editardescuento/<int:id>', vproducto.editar_descuento, name='editardescuento'),
+    path('eliminardescuento/<int:id>', vproducto.eliminar_descuento, name='eliminardescuento'),
+
     # ADMINISTRAR PEDIDOS
     path('verpedidos/', vproducto.ver_pedidos, name='verpedidos'),
     path('editarpedido/<int:id>', vproducto.editar_pedidos, name='editarpedido'),
+    path('eliminarpedido/<int:id>', vproducto.eliminar_pedido, name='eliminarpedido'),
 
     # CARRITO
     path('producto_a_carrito/<int:producto_id>/', views.producto_a_carrito, name='producto_a_carrito'),
