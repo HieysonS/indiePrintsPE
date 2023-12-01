@@ -10,7 +10,7 @@ from producto.models import *
 
 def ver_polos(request):
     cantidad_polos = Producto.objects.count()
-    polos = Producto.objects.order_by('name')
+    polos = Producto.objects.order_by('nombre')
     # polos = get_object_or_404(Producto, pk=id)
     return render(request, 'crud/polos/verpolos.html', {'cantidad_polos': cantidad_polos, 'polos': polos})
 
@@ -46,8 +46,8 @@ def editar_polo(request, id):
 def eliminar_polo(request, id):
     polo = get_object_or_404(Producto, pk=id)
     if polo:
-        if polo.image:
-            os.remove(polo.image.path)
+        if polo.imagen:
+            os.remove(polo.imagen.path)
         polo.delete()
     return redirect('verpolos')
 
@@ -253,6 +253,8 @@ def editar_pedidos(request, id):
 def eliminar_pedido(request, id):
     pedido = get_object_or_404(Pedido, pk=id)
     if pedido:
+        if pedido.comprobante:
+            os.remove(pedido.comprobante.path)
         pedido.delete()
     return redirect('/verpedidos')
 

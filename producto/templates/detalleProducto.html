@@ -4,18 +4,18 @@
 <article class="media" style="align-items: flex-start;">
     <figure class="media-left">
         <p class="image is-128x128">
-            <img alt="Imagen de {{ producto.name }}" src="{{ producto.image.url }}">
+            <img alt="Imagen de {{ producto.nombre }}" src="{{ producto.imagen.url }}">
         </p>
     </figure>
     <div class="media-content">
         <div class="content">
-            <h1><strong>{{producto.name}}</strong></h1>
+            <h1><strong>{{producto.nombre}}</strong></h1>
             <h6><strong>Talla:</strong> {{producto.talla}} |
                 {% if producto.descuento %}
-                    <del>S/. {{producto.price}}</del>|
+                    <del>S/. {{producto.precio}}</del>|
                     <strong> S/. {{producto.precio_con_descuento}}</strong>
                 {% else %}
-                    <strong>Precio:</strong> S/. {{producto.price}}
+                    <strong>Precio:</strong> S/. {{producto.precio}}
                 {% endif %}
             </h6>
             {% if producto.stock == 0 %}
@@ -25,10 +25,17 @@
             {% endif %}
         </div>
         <div class="buttons">
+            {% if producto.stock == 0 %}
+            <form method="post" action="{% url 'producto_a_carrito' producto.id %}">
+                {% csrf_token %}
+                <input type="text" class="button is-succes" value="Añadir al carrito" readonly>
+            </form>
+            {% else %}
             <form method="post" action="{% url 'producto_a_carrito' producto.id %}">
                 {% csrf_token %}
                 <input type="submit" class="button is-succes" value="Añadir al carrito">
             </form>
+            {% endif %}
         </div>
     </div>
     <div class="media-right">

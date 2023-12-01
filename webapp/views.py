@@ -4,14 +4,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
-from producto.forms import PedidoForm
 from producto.models import *
 
 from django.shortcuts import get_object_or_404
 from producto.views import Producto, Carrito, CarritoProducto
-
-from webapp.templatetags.cart_extras import cart_total
-from django.views.decorators.clickjacking import xframe_options_exempt
 
 
 # Create your views here.
@@ -49,7 +45,7 @@ def catalogo(request):
     material = request.GET.get('material')
     busqueda = request.GET.get('busqueda')
 
-    productos_list = Producto.objects.order_by('name')
+    productos_list = Producto.objects.order_by('nombre')
     if categoria:
         productos_list = productos_list.filter(categoria=categoria)
     if color:
@@ -60,7 +56,7 @@ def catalogo(request):
         productos_list = productos_list.filter(talla=talla)
     if busqueda:
         productos_list = productos_list.filter(
-            Q(name__icontains=busqueda) |
+            Q(nombre__icontains=busqueda) |
             Q(talla__nombreTalla__icontains=busqueda) |
             Q(material__nombreMaterial__icontains=busqueda) |
             Q(color__nombreColor__icontains=busqueda) |
@@ -180,6 +176,7 @@ def crear_pedido(request):
         direccion = request.POST['direccion']
         telefono = request.POST['telefono']
         email = request.POST['email']
+        comprobante = request.FILES['comprobante']
         carrito = request.POST['carrito']  # Asegúrate de que este es el ID del carrito
         estado = request.POST['estado']  # Asegúrate de que este es el ID del estado
 
@@ -195,6 +192,7 @@ def crear_pedido(request):
             estado_id=estado
         )
         pedido.save()
+        pedido.comprobante.save(comprobante.name, comprobante)
         request.session.create()
         return redirect('/')
     return render(request, '/crear_pedido')

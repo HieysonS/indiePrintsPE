@@ -44,35 +44,35 @@ class Descuento(models.Model):
 
 
 class Producto(models.Model):
-    name = models.CharField(max_length=255, null=False, verbose_name="Nombre")
+    nombre = models.CharField(max_length=255, null=False, verbose_name="Nombre")
     talla = models.ForeignKey(Talla, on_delete=models.CASCADE, verbose_name="Talla")
     material = models.ForeignKey(Material, on_delete=models.CASCADE, verbose_name="Material")
     color = models.ForeignKey(Color, on_delete=models.CASCADE, verbose_name="Color")
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name="Categória")
     descuento = models.ForeignKey(Descuento, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Descuento")
-    image = models.ImageField(upload_to="imagenes/", verbose_name='Imagen', null=True)
+    imagen = models.ImageField(upload_to="imagenes/", verbose_name='Imagen', null=True)
     descripcion = models.CharField(max_length=255, null=False, verbose_name='Descripción')
-    price = models.FloatField(null=False, verbose_name='Precio')
+    precio = models.FloatField(null=False, verbose_name='Precio')
     stock = models.PositiveIntegerField(null=False, verbose_name="Stock")
 
     def __str__(self):
-        return f'{self.name}' \
-               f'\n - Precio: {self.price}' \
+        return f'{self.nombre}' \
+               f'\n - Precio: {self.precio}' \
                f' - Stock: {self.stock}'
 
     def delete(self, using=None, keep_parents=False):
-        self.image.storage.delete(self.image.name)
+        self.imagen.storage.delete(self.imagen.name)
         super().delete()
 
     def precio_con_descuento(self):
         if self.descuento:
-            return self.price * (100 - self.descuento.valor) / 100
+            return self.precio * (100 - self.descuento.valor) / 100
         else:
-            return self.price
+            return self.precio
 
 
 class Estado(models.Model):
-    nombreEstado = models.CharField(max_length=100, verbose_name='nombre')
+    nombreEstado = models.CharField(max_length=100, verbose_name='nombreEstado')
 
     def __str__(self):
         return f'{self.nombreEstado}'
@@ -114,6 +114,7 @@ class Pedido(models.Model):
     direccion = models.CharField(max_length=200, verbose_name='direccion')
     telefono = models.CharField(max_length=15, verbose_name='telefono')
     email = models.EmailField(max_length=100, verbose_name='email')
+    comprobante = models.ImageField(upload_to="comprobantes/", verbose_name='Comprobante', null=True)
     carrito = models.OneToOneField(Carrito, on_delete=models.CASCADE, null=False, verbose_name="carrito")
     fecha = models.DateTimeField(auto_now_add=True)
     estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, verbose_name="estado", null=True)
@@ -121,6 +122,10 @@ class Pedido(models.Model):
     @property
     def subtotal(self):
         return self.carrito.subtotal()
+
+    def delete(self, using=None, keep_parents=False):
+        self.comprobante.storage.delete(self.comprobante.name)
+        super().delete()
 
     def __str__(self):
         return f'{self.dni} |' \

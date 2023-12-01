@@ -16,8 +16,9 @@
                 <th>Telefono</th>
                 <th>Email</th>
                 <th>Compra</th>
-                <th>PAGO</th>
-                <th>ESTADO</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Comprobante</th>
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -43,9 +44,9 @@
                             {% for item in pedido.carrito.carritoproducto_set.all %}
                                 <tr>
                                     <td style="justify-content: center;">
-                                        <img src="{{ item.producto.image.url }}" alt="{{ item.producto.name }}">
+                                        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}">
                                     </td>
-                                    <td>{{ item.producto.name }}</td>
+                                    <td>{{ item.producto.nombre }}</td>
                                     <td>{{ item.cantidad }}</td>
                                     <td>{{ item.producto.precio_con_descuento }}</td>
                                 </tr>
@@ -54,6 +55,11 @@
                     </table>
                 </td>
                 <td>{{ pedido.subtotal }}</td>
+                <td style="justify-content: center;">
+                    <a href="{{ pedido.comprobante.url }}" target="_blank">
+                        <img src='{{ pedido.comprobante.url }}' alt='{{ pedido.dni }}'>
+                    </a>
+                </td>
                 <td>{{ pedido.estado }}</td>
                 <td style="text-align: right; width: 1%; white-space: nowrap;">
                     <a class="button is-small is-link is-outlined"

@@ -26,9 +26,9 @@
             <tbody>
             <tr>
                 <td style="display: flex; justify-content: center;">
-                    <img class="image is-48x48" src="{{ item.producto.image.url }}" alt="{{ item.producto.name }}">
+                    <img class="image is-48x48" src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}">
                 </td>
-                <td>{{ item.producto.name }}</td>
+                <td>{{ item.producto.nombre }}</td>
                 <td>{{ item.producto.talla }}</td>
                 <td style="text-align: right; width: 1%; white-space: nowrap;">
                     <a class="button is-small is-danger is-outlined" href="{% url 'disminuir_cantidad' item.id %}"><strong>-</strong></a>
@@ -60,8 +60,9 @@
     <div class="contenedor" id="contenedor" style="display: none;">
         <div style="display: flex; justify-content: space-between; flex: 1">
             <div>
-                <form method="POST" action="{% url 'crear_pedido' %}">
+                <form method="POST" action="{% url 'crear_pedido' %}" enctype="multipart/form-data">
                     {% csrf_token %}
+                    </br>
                     <input class="input is-rounded" type="text" name="dni" placeholder="DNI"></br>
                     <input class="input is-rounded" type="text" name="nombre" placeholder="Nombre"></br>
                     <input class="input is-rounded" type="text" name="apellido_paterno" placeholder="Apellido Paterno"></br>
@@ -69,8 +70,11 @@
                     <input class="input is-rounded" type="text" name="direccion" placeholder="Dirección"></br>
                     <input class="input is-rounded" type="text" name="telefono" placeholder="Teléfono"></br>
                     <input class="input is-rounded" type="email" name="email" placeholder="Email"></br>
-                    <input type="hidden" name="carrito" value="{{ carrito.id }}"></br>
-                    <input type="hidden" name="estado" value="{{ estado.id }}">
+                    <input class="input is-rounded" type="file" name="comprobante" accept="image/*">
+                    <input type="hidden" name="carrito" value="{{ carrito.id }}">
+                    <input type="hidden" name="estado" value="1">
+                    </br>
+                    </br>
                     <button class="button is-success is-rounded" type="submit"><strong>TERMINAR COMPRA: S/.{{ carrito.subtotal }}</strong></button>
                 </form>
             </div>

@@ -90,7 +90,7 @@
                     <div class="card-image">
                         <figure class="image is-4by5">
                             <a href="detalleProducto/{{producto.id}}">
-                                <img alt="Imagen de {{ producto.name }}" src="{{ producto.image.url }}">
+                                <img alt="Imagen de {{ producto.nombre }}" src="{{ producto.imagen.url }}">
                                 <div class="notification is-primary has-text-centered" style="position: absolute; top: 5%; left: 80%; transform: translate(-50%, -50%); border-radius: 50%; width: 100px; height: 40px;">
                                     <img src="https://github.com/HieysonS/IndiePrintsImagenes/blob/main/ofertas.png?raw=true" alt="Oferta">
                                 </div>
@@ -101,19 +101,19 @@
                     <div class="card-image">
                         <figure class="image is-4by5">
                             <a href="detalleProducto/{{producto.id}}">
-                                <img alt="Imagen de {{ producto.name }}" src="{{ producto.image.url }}">
+                                <img alt="Imagen de {{ producto.nombre }}" src="{{ producto.imagen.url }}">
                             </a>
                         </figure>
                     </div>
                     {% endif %}
                     <div class="card-content">
-                        <p class="title is-4">{{ producto.name }}</p>
+                        <p class="title is-4">{{ producto.nombre }}</p>
                         <p class="subtitle is-10">Talla: {{ producto.talla }}</p>
                         {% if producto.descuento %}
-                            <p class="subtitle is-10"><del>Antes: S/. {{ producto.price }}</del></p>
+                            <p class="subtitle is-10"><del>Antes: S/. {{ producto.precio }}</del></p>
                             <p class="subtitle is-10">Ahora: S/. {{ producto.precio_con_descuento }}</p>
                         {% else %}
-                            <p class="subtitle is-10">Precio: S/. {{ producto.price }}</p>
+                            <p class="subtitle is-10">Precio: S/. {{ producto.precio }}</p>
                         {% endif %}
                     </div>
                 </div>
