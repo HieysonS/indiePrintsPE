@@ -45,10 +45,10 @@ class Descuento(models.Model):
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=255, null=False, verbose_name="Nombre")
-    talla = models.ForeignKey(Talla, on_delete=models.CASCADE, verbose_name="Talla")
-    material = models.ForeignKey(Material, on_delete=models.CASCADE, verbose_name="Material")
-    color = models.ForeignKey(Color, on_delete=models.CASCADE, verbose_name="Color")
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name="Categória")
+    talla = models.ForeignKey(Talla, on_delete=models.SET_NULL, null=True, verbose_name="Talla")
+    material = models.ForeignKey(Material, on_delete=models.SET_NULL, null=True, verbose_name="Material")
+    color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, verbose_name="Color")
+    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, verbose_name="Categória")
     descuento = models.ForeignKey(Descuento, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Descuento")
     imagen = models.ImageField(upload_to="imagenes/", verbose_name='Imagen', null=True)
     descripcion = models.CharField(max_length=255, null=False, verbose_name='Descripción')
@@ -115,9 +115,9 @@ class Pedido(models.Model):
     telefono = models.CharField(max_length=15, verbose_name='telefono')
     email = models.EmailField(max_length=100, verbose_name='email')
     comprobante = models.ImageField(upload_to="comprobantes/", verbose_name='Comprobante', null=True)
-    carrito = models.OneToOneField(Carrito, on_delete=models.CASCADE, null=False, verbose_name="carrito")
+    carrito = models.OneToOneField(Carrito, on_delete=models.DO_NOTHING, null=False, verbose_name="carrito")
     fecha = models.DateTimeField(auto_now_add=True)
-    estado = models.ForeignKey(Estado, on_delete=models.SET_NULL, verbose_name="estado", null=True)
+    estado = models.ForeignKey(Estado, on_delete=models.DO_NOTHING, verbose_name="estado", null=True)
 
     @property
     def subtotal(self):
